@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-tag-media",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "n8n nodes for embedding metadata into audio, media, and Office document files",
 	"license": "MIT",
 	"homepage": "https://github.com/adamfisher/n8n-nodes-tag-media",
@@ -42,8 +42,7 @@
 	"n8n": {
 		"n8nNodesApiVersion": 1,
 		"strict": false,
-		"credentials": [
-		],
+		"credentials": [],
 		"nodes": [
 			"dist/nodes/ReadFileTags/ReadFileTags.node.js",
 			"dist/nodes/TagAudioFile/TagAudioFile.node.js",
