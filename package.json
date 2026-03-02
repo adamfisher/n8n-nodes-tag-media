@@ -1,0 +1,67 @@
+{
+	"name": "n8n-nodes-tag-media",
+	"version": "0.1.0",
+	"description": "n8n nodes for embedding metadata into audio, media, and Office document files",
+	"license": "MIT",
+	"homepage": "https://github.com/adamfisher/n8n-nodes-tag-media",
+	"keywords": [
+		"n8n-community-node-package",
+		"n8n",
+		"metadata",
+		"audio",
+		"tagging",
+		"id3",
+		"exif"
+	],
+	"author": {
+		"name": "Adam Fisher"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/adamfisher/n8n-nodes-tag-media.git"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"dev:docker": "npm run build && docker compose up --build -d",
+		"dev:docker:down": "docker compose down",
+		"dev:docker:logs": "docker compose logs -f",
+		"dev:docker:rebuild": "npm run build && docker compose up --build --force-recreate",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": false,
+		"credentials": [
+		],
+		"nodes": [
+			"dist/nodes/ReadFileTags/ReadFileTags.node.js",
+			"dist/nodes/TagAudioFile/TagAudioFile.node.js",
+			"dist/nodes/TagMediaFile/TagMediaFile.node.js",
+			"dist/nodes/TagOfficeDocument/TagOfficeDocument.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "*",
+		"@types/node": "^25.3.3",
+		"@vitest/coverage-v8": "^4.0.18",
+		"eslint": "9.32.0",
+		"prettier": "3.6.2",
+		"release-it": "^19.0.4",
+		"typescript": "5.9.2",
+		"vitest": "^4.0.18"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}

@@ -1,0 +1,23 @@
+# Development environment for testing custom nodes
+services:
+  n8n:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_LOG_LEVEL=debug
+      - N8N_CUSTOM_EXTENSIONS=/home/node/custom-nodes
+    volumes:
+      # Mount the built node package
+      - ./dist:/home/node/custom-nodes/n8n-nodes-tag-media/dist:ro
+      - ./package.json:/home/node/custom-nodes/n8n-nodes-tag-media/package.json:ro
+      # Persist n8n data between restarts
+      - n8n_data:/home/node/.n8n
+      # Mount scripts for hot-reload during development
+      - ./scripts:/app:ro
+    restart: unless-stopped
+
+volumes:
+  n8n_data:

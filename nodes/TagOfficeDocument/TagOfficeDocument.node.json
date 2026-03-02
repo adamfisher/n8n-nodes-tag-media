@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-tag-media.tagOfficeDocument",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Core Nodes"],
+	"subcategories": {
+		"Core Nodes": ["Data Transformation"]
+	},
+	"alias": ["File Metadata", "metadata", "tags", "office", "docx", "xlsx", "pptx"],
+	"description": "Update embedded tags in Office documents",
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/adamfisher/n8n-nodes-tag-media"
+			}
+		]
+	}
+}

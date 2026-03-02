@@ -1,0 +1,9 @@
+node_modules
+.git
+.github
+*.md
+.vscode
+.prettierrc.js
+eslint.config.mjs
+tsconfig.json
+*.log

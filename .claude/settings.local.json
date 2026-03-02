@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(npm install:*)",
+      "Bash(docker build:*)",
+      "Bash(docker run:*)",
+      "Bash(npx n8n:*)",
+      "Bash(docker compose:*)",
+      "Bash(docker image:*)",
+      "WebFetch(domain:exiftool.org)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npm test:*)"
+    ]
+  }
+}
