@@ -8,12 +8,21 @@ on:
     tags:
       - 'v*'
 
+# Prevent duplicate runs - if a tag push happens with a commit, only run once
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -39,36 +48,32 @@ jobs:
       - name: Run tests
         run: npm test
 
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
-    permissions:
-      contents: write
+      # Check if current commit has a version tag
+      - name: Check for version tag
+        id: check_tag
+        run: |
+          TAG=$(git tag --points-at HEAD | grep -E '^v[0-9]+\.' | head -n1)
+          if [ -n "$TAG" ]; then
+            echo "has_tag=true" >> $GITHUB_OUTPUT
+            echo "tag=$TAG" >> $GITHUB_OUTPUT
+            echo "Found version tag: $TAG"
+          else
+            echo "has_tag=false" >> $GITHUB_OUTPUT
+            echo "No version tag found"
+          fi
 
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run build
-        run: npm run build
-
+      # Publish only if there's a version tag
       - name: Publish to NPM
+        if: steps.check_tag.outputs.has_tag == 'true'
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
+        if: steps.check_tag.outputs.has_tag == 'true'
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.check_tag.outputs.tag }}
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
