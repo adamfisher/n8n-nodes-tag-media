@@ -1,0 +1,26 @@
+# Test files
+tests/
+dist/tests/
+*.test.ts
+*.test.js
+vitest.config.ts
+
+# Development files
+.github/
+.vscode/
+.claude/
+scripts/
+docker-compose.yml
+Dockerfile
+*.tsbuildinfo
+dist/*.tsbuildinfo
+
+# Source files (only dist is needed)
+nodes/
+tsconfig.json
+eslint.config.mjs
+.prettierrc.js
+.gitignore
+.dockerignore
+CHANGELOG.md
+README_TEMPLATE.md
