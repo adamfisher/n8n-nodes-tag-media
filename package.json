@@ -1,5 +1,5 @@
 {
-	"name": "n8n-nodes-tag-media",
+	"name": "@adam-fisher/n8n-nodes-tag-media",
 	"version": "1.0.0",
 	"description": "n8n nodes for embedding metadata into audio, media, and Office document files",
 	"license": "MIT",
