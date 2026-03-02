@@ -6,8 +6,12 @@ import type {
 } from 'n8n-workflow';
 import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 import { readFile } from 'fs/promises';
+import { join } from 'path';
 
 import { getBinaryBuffer, runCommand, cleanupFiles } from '../shared/utils';
+
+// Path to Python script (relative to compiled node location in dist/nodes/TagAudioFile/)
+const SCRIPT_PATH = join(__dirname, '..', '..', '..', 'scripts', 'tag_audio.py');
 import { createInputFilePath, writeTempFile, writeMetadataJson } from '../shared/tempFiles';
 
 export class TagAudioFile implements INodeType {
@@ -357,7 +361,7 @@ export class TagAudioFile implements INodeType {
 
 				// Run Python script
 				const result = await runCommand(this, itemIndex, 'python3', [
-					'/app/tag_audio.py',
+					SCRIPT_PATH,
 					inputPath,
 					metaPath,
 				]);

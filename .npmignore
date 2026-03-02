@@ -9,7 +9,6 @@ vitest.config.ts
 .github/
 .vscode/
 .claude/
-scripts/
 docker-compose.yml
 Dockerfile
 *.tsbuildinfo
