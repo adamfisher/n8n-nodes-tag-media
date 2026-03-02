@@ -32,9 +32,7 @@
 		"lint:fix": "n8n-node lint --fix",
 		"test": "vitest run",
 		"test:watch": "vitest",
-		"test:coverage": "vitest run --coverage",
-		"release": "n8n-node release",
-		"prepublishOnly": "n8n-node prerelease"
+		"test:coverage": "vitest run --coverage"
 	},
 	"files": [
 		"dist"
